@@ -1,0 +1,89 @@
+{
+  "New Character Template" : {
+    "Real Name" : "",
+    "Agent Name" : "",
+    "Profession" : "",
+    "Employer" : "",
+    "Nationality" : "",
+    "Sex" : "",
+    "DOB" : "",
+    "Education" : "",
+    "Physical Description": "",
+    "Bonds" : {
+      "Bond 1" : {
+        "Name" : "",
+        "Score": 0
+      }
+    },
+    "Motivations" : "",
+    "AdaptViolence" : 0,
+    "AdaptHelplessness" : 0,
+    "BaseStats" : {
+      "Str" : 12,
+      "Con" : 12,
+      "Dex" : 12,
+      "Int" : 12,
+      "Pow" : 12,
+      "Cha" : 12
+    },
+    "DerivedStats" : {
+      "HP" : 0,
+      "WP" : 0,
+      "San" : 0,
+      "BP" : 0
+    },
+    "Skills" : {
+      "Accounting" : 10,
+      "Alertness" : 20,
+      "Anthropology" : 0,
+      "Archaeology" : 0,
+      "Art" : 0,
+      "Artillery" : 0,
+      "Athletics" : 30,
+      "Bureaucracy" : 10,
+      "Computer Science" : 0,
+      "Craft" : {
+        "Type" : "",
+        "Rating" : 0
+      },
+      "Criminology" : 10,
+      "Demolitions" : 0,
+      "Disguise" : 10,
+      "Dodge" : 30,
+      "Drive" : 20,
+      "Firearms" : 20,
+      "First Aid" : 10,
+      "Forensics" : 0,
+      "Heavy Machinery" : 10,
+      "Heavy Weapons" : 0,
+      "History" : 10,
+      "HumInt" : 10,
+      "Law" : 0,
+      "Medicine" : 0,
+      "Melee Weapons" : 30,
+      "Military Science" : 0,
+      "Navigate" : 10,
+      "Occult" : 10,
+      "Persuade" : 20,
+      "Pharmacy" : 0,
+      "Pilot" : 0,
+      "Psychotherapy" : 10,
+      "Ride" : 10,
+      "Science" : 0,
+      "Search" : 20,
+      "SigInt" : 0,
+      "Stealth" : 10,
+      "Surgery" : 0,
+      "Survival" : 10,
+      "Swim" : 20,
+      "Unarmed Combat" : 40,
+      "Unnatural" : 0,
+      "Language" : {
+        "Language 1" : {
+          "Name" : "N/A",
+          "Rating" : 0
+        }
+      }
+    }
+  }
+}
