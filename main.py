@@ -18,5 +18,6 @@ while 1:
         case 3:
             print("Thank you for checking out my API! :)")
             input("Press any key to quit...")
+            quit()
         case _:
             print ("Invalid Option. Please try again")

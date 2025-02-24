@@ -9,13 +9,13 @@
     "DOB" : "",
     "Education" : "",
     "Physical Description": "",
+    "Motivations" : "",
     "Bonds" : {
       "Bond 1" : {
         "Name" : "",
         "Score": 0
       }
     },
-    "Motivations" : "",
     "AdaptViolence" : 0,
     "AdaptHelplessness" : 0,
     "BaseStats" : {
@@ -43,7 +43,7 @@
       "Bureaucracy" : 10,
       "Computer Science" : 0,
       "Craft" : {
-        "Type" : "",
+        "Type" : "None",
         "Rating" : 0
       },
       "Criminology" : 10,
@@ -61,7 +61,10 @@
       "Law" : 0,
       "Medicine" : 0,
       "Melee Weapons" : 30,
-      "Military Science" : 0,
+      "Military Science" : {
+        "Type" : "None",
+        "Rating" : 0
+      },
       "Navigate" : 10,
       "Occult" : 10,
       "Persuade" : 20,
