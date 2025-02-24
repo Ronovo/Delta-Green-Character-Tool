@@ -33,3 +33,13 @@ criminal = professions.Profession("Criminal",[
     {"Name": "Foreign Language (Choose One)", "Skill": 40}, {"Name": "HUMINT", "Skill": 50},
     {"Name": "Navigate", "Skill" : 50},{"Name": "Occult", "Skill" : 50},{"Name": "Pharmacy", "Skill" : 40},
     ])
+
+def getProfessionList():
+    professionList = [fbi,specialForce,criminal]
+    return professionList
+
+def searchPresetsByName(name):
+    professionList = getProfessionList()
+    for x in professionList:
+        if x.name == name:
+            return x

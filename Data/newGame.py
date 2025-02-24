@@ -33,43 +33,40 @@ def createNewCharacter():
     secondaryChoices = 0
     while not professionSet:
         print("Select a Profession Below for more info")
-        print("1.) FBI Agent")
-        print("2.) Special Forces")
-        print("3.) Criminal")
+        n = 1
+        professionList = professions_presets.getProfessionList()
+        for x in professionList:
+            print(str(n) + ".) " + x.name)
+            n += 1
         proAnswer = input("Please select a number...\n")
-        match int(proAnswer):
-            case 1:
-                fbiPreset = professions_presets.fbi
-                professionPreset = fbiPreset
-                professionName = fbiPreset.name
+        selectedIndex = int(proAnswer) - 1
+        professionPreset = professions_presets.searchPresetsByName(professionList[selectedIndex].name)
+        professionName = professionPreset.name
+        print("Options for " + professionName)
+        #Make this so you search by name
+        match professionPreset.name:
+            case "FBI Agent":
                 print("Suggested Base Stats : Con, Pow, Cha")
                 print("Base Skill Ratings")
                 print("---------------------------------")
-                fbiPreset.displaySkillList()
+                professionPreset.displaySkillList()
                 print("---------------------------------")
                 print("One Additional Skill from below:")
-                fbiPreset.displaySecondarySkillList()
+                professionPreset.displaySecondarySkillList()
                 secondaryChoices = 1
-            case 2:
-                specialForcePreset = professions_presets.specialForce
-                professionPreset = specialForcePreset
-                professionName = specialForcePreset.name
-                print("You selected " + professionName)
+            case "Special Forces":
                 print("Suggested Base Stats : Str, Con, Pow")
                 print("Base Skill Ratings")
                 print("---------------------------------")
-                specialForcePreset.displaySkillList()
-            case 3:
-                criminalPreset = professions_presets.criminal
-                professionPreset = criminalPreset
-                professionName = criminalPreset.name
+                professionPreset.displaySkillList()
+            case "Criminal":
                 print("Suggested Base Stats : Str, Dex")
                 print("Base Skill Ratings")
                 print("---------------------------------")
-                criminalPreset.displaySkillList()
+                professionPreset.displaySkillList()
                 print("---------------------------------")
                 print("Two Additional Skills from below:")
-                criminalPreset.displaySecondarySkillList()
+                professionPreset.displaySecondarySkillList()
                 secondaryChoices = 2
             case _:
                 print("Invalid Option, try again")
