@@ -1,5 +1,8 @@
 import json
 import math
+from Data import skillHelper
+
+from Presets import professions_presets
 
 
 def createNewCharacter():
@@ -26,7 +29,8 @@ def createNewCharacter():
     #TODO add ProfessionList
     professionSet = False
     professionName = ""
-    professionList = []
+    professionPreset = None
+    secondaryChoices = 0
     while not professionSet:
         print("Select a Profession Below for more info")
         print("1.) FBI Agent")
@@ -35,227 +39,61 @@ def createNewCharacter():
         proAnswer = input("Please select a number...\n")
         match int(proAnswer):
             case 1:
-                professionName = "FBI Agent"
+                fbiPreset = professions_presets.fbi
+                professionPreset = fbiPreset
+                professionName = fbiPreset.name
                 print("Suggested Base Stats : Con, Pow, Cha")
                 print("Base Skill Ratings")
                 print("---------------------------------")
-                print("Alertness : 50 | Bureaucracy 40")
-                print("Criminology : 50 | Drive : 50")
-                print("Firearms : 50 | Forensics : 30")
-                print("HUMINT : 60 | Law : 30 | Persuade : 50")
-                print("Search : 50 | Unarmed Combat : 60")
+                fbiPreset.displaySkillList()
                 print("---------------------------------")
                 print("One Additional Skill from below:")
-                print("Accounting : 60 | Computer Science : 50")
-                print("Foreign Language (Choose One) : 50")
-                print("Heavy Weapon : 50 | Pharmacy 50")
+                fbiPreset.displaySecondarySkillList()
+                secondaryChoices = 1
             case 2:
-                professionName = "Special Forces"
+                specialForcePreset = professions_presets.specialForce
+                professionPreset = specialForcePreset
+                professionName = specialForcePreset.name
+                print("You selected " + professionName)
                 print("Suggested Base Stats : Str, Con, Pow")
                 print("Base Skill Ratings")
                 print("---------------------------------")
-                print("Alertness : 60 | Athletics : 60")
-                print("Demolitions : 40 | Firearms : 60")
-                print("Heavy Weapon : 50 | Melee Weapon : 50")
-                print("Military Science (Land) : 60")
-                print("Navigate : 50 | Stealth : 50")
-                print("Survival : 50 | Swim : 50")
-                print("Unarmed Combat : 60")
+                specialForcePreset.displaySkillList()
             case 3:
-                professionName = "Criminal"
+                criminalPreset = professions_presets.criminal
+                professionPreset = criminalPreset
+                professionName = criminalPreset.name
                 print("Suggested Base Stats : Str, Dex")
                 print("Base Skill Ratings")
                 print("---------------------------------")
-                print("Alertness : 50 | Criminology : 60")
-                print("Dodge : 50 | Drive : 50 | Firearms : 50")
-                print("Law : 40 | Melee Weapons : 40")
-                print("Persuade : 50 | Stealth : 50")
-                print("Unarmed Combat : 50")
+                criminalPreset.displaySkillList()
                 print("---------------------------------")
                 print("Two Additional Skills from below:")
-                print("Craft(Locksmithing) : 40 | Demolitions : 40")
-                print("Disguise : 50 | Forensics : 40")
-                print("Foreign Language (Choose One) : 40")
-                print("HUMINT : 50 | Navigate : 50")
-                print("Occult : 50 | Pharmacy : 40")
+                criminalPreset.displaySecondarySkillList()
+                secondaryChoices = 2
             case _:
                 print("Invalid Option, try again")
         selectProfession = input("Press 1 if you want to select this profession...\n")
         if int(selectProfession) == 1:
             newCharacter["Profession"] = professionName
             professionSet = True
-    match professionName:
-        case "FBI Agent":
-            newCharacter["Skills"]["Alertness"] = 50
-            newCharacter["Skills"]["Bureaucracy"] = 40
-            newCharacter["Skills"]["Criminology"] = 50
-            newCharacter["Skills"]["Drive"] = 50
-            newCharacter["Skills"]["Firearms"] = 50
-            newCharacter["Skills"]["Forensics"] = 30
-            newCharacter["Skills"]["HUMINT"] = 60
-            newCharacter["Skills"]["Law"] = 30
-            newCharacter["Skills"]["Persuade"] = 50
-            newCharacter["Skills"]["Search"] = 50
-            newCharacter["Skills"]["Unarmed Combat"] = 60
-            additionalSkill = False
-            while not additionalSkill:
-                print("Select a skill from below:")
-                print("1.) Accounting : 60")
-                print("2.) Computer Science : 50")
-                print("3.) Foreign Language (Choose One) : 50")
-                print("4.) Heavy Weapon : 50 ")
-                print("5.) Pharmacy : 50 ")
-                addSkillAnswer = input("Enter number here: ")
-                match int(addSkillAnswer):
-                    case 1:
-                        newCharacter["Skills"]["Accounting"] = 60
-                        additionalSkill = True
-                    case 2:
-                        newCharacter["Skills"]["Computer Science"] = 50
-                        additionalSkill = True
-                    case 3:
-                        languageAnswer = input("What is the language?")
-                        newCharacter["Skills"]['Language']['Language 1']['Name'] = languageAnswer
-                        newCharacter["Skills"]['Language']['Language 1']['Rating'] = 50
-                        additionalSkill = True
-                    case 4:
-                        newCharacter["Skills"]["Unarmed Combat"] = 50
-                        additionalSkill = True
-                    case 5:
-                        newCharacter["Skills"]["Unarmed Combat"] = 50
-                        additionalSkill = True
-                    case _:
-                        print("Invalid Option, try again")
-        case "Special Forces":
-            newCharacter["Skills"]["Alertness"] = 60
-            newCharacter["Skills"]["Athletics"] = 60
-            newCharacter["Skills"]["Demolitions"] = 40
-            newCharacter["Skills"]["Firearms"] = 60
-            newCharacter["Skills"]["Heavy Weapon"] = 50
-            newCharacter["Skills"]["Melee Weapon"] = 50
-            newCharacter["Skills"]["Military Science"]["Type"] = "Land"
-            newCharacter["Skills"]["Military Science"]["Rating"] = 60
-            newCharacter["Skills"]["Navigate"] = 50
-            newCharacter["Skills"]["Stealth"] = 50
-            newCharacter["Skills"]["Survival"] = 50
-            newCharacter["Skills"]["Swim"] = 50
-            newCharacter["Skills"]["Unarmed Combat"] = 60
-        case "Criminal":
-            newCharacter["Skills"]["Alertness"] = 50
-            newCharacter["Skills"]["Criminology"] = 60
-            newCharacter["Skills"]["Dodge"] = 50
-            newCharacter["Skills"]["Drive"] = 50
-            newCharacter["Skills"]["Firearms"] = 50
-            newCharacter["Skills"]["Law"] = 40
-            newCharacter["Skills"]["Melee Weapons"] = 40
-            newCharacter["Skills"]["Persuade"] = 50
-            newCharacter["Skills"]["Stealth"] = 50
-            newCharacter["Skills"]["Unarmed Combat"] = 50
 
-            additionalSkill1 = False
-            additionalSkillMenu = ["Craft(Locksmithing) : 40","Demolitions : 40",
-                                   "Disguise : 50","Forensics : 40",
-                                   "Foreign Language (Choose One) : 40","HUMINT : 50",
-                                   "Navigate : 50","Occult : 50","Pharmacy : 40 "]
-            while not additionalSkill1:
-                print("Select your 1st skill:")
-                print("1.) Craft(Locksmithing) : 40")
-                print("2.) Demolitions : 40")
-                print("3.) Disguise : 50 ")
-                print("4.) Forensics : 40 ")
-                print("5.) Foreign Language (Choose One) : 40")
-                print("6.) HUMINT : 50 ")
-                print("7.) Navigate : 50 ")
-                print("8.) Occult : 50 ")
-                print("9.) Pharmacy : 40 ")
-                addSkillAnswer = input("Enter number here: ")
-                match int(addSkillAnswer):
-                    case 1:
-                        del additionalSkillMenu[0]
-                        newCharacter["Skills"]["Craft"]["Type"] = "Lockpicking"
-                        newCharacter["Skills"]["Craft"]["Rating"] = 40
-                        additionalSkill1 = True
-                    case 2:
-                        del additionalSkillMenu[1]
-                        newCharacter["Skills"]["Demolitions"] = 40
-                        additionalSkill1 = True
-                    case 3:
-                        del additionalSkillMenu[2]
-                        newCharacter["Skills"]["Disguise"] = 50
-                        additionalSkill1 = True
-                    case 4:
-                        del additionalSkillMenu[3]
-                        newCharacter["Skills"]["Forensics"] = 40
-                        additionalSkill1 = True
-                    case 5:
-                        del additionalSkillMenu[4]
-                        languageAnswer = input("What is the language?")
-                        newCharacter["Skills"]['Language']['Language 1']['Name'] = languageAnswer
-                        newCharacter["Skills"]['Language']['Language 1']['Rating'] = 40
-                        additionalSkill1 = True
-                    case 6:
-                        del additionalSkillMenu[5]
-                        newCharacter["Skills"]["HUMINT"] = 50
-                        additionalSkill1 = True
-                    case 7:
-                        del additionalSkillMenu[6]
-                        newCharacter["Skills"]["Navigate"] = 50
-                        additionalSkill1 = True
-                    case 8:
-                        del additionalSkillMenu[7]
-                        newCharacter["Skills"]["Occult"] = 50
-                        additionalSkill1 = True
-                    case 9:
-                        del additionalSkillMenu[8]
-                        newCharacter["Skills"]["Pharmacy"] = 50
-                        additionalSkill1 = True
-                    case _:
-                        print("Invalid Option, try again")
-
-            additionalSkill2 = False
-            while not additionalSkill2:
-                print("Select your 2nd skill:")
-                n = 1
-                for x in additionalSkillMenu:
-                    print(str(n) + ".) " + x)
-                    n += 1
-                addSkillAnswer = input("Enter number here: ")
-                skillMenuIndex = int(addSkillAnswer)-1
-                skill = additionalSkillMenu[skillMenuIndex]
-
-                match skill:
-                    case "Craft(Locksmithing) : 40":
-                        newCharacter["Skills"]["Craft"]["Type"] = "Lockpicking"
-                        newCharacter["Skills"]["Craft"]["Rating"] = 40
-                        additionalSkill2 = True
-                    case "Demolitions : 40":
-                        newCharacter["Skills"]["Demolitions"] = 40
-                        additionalSkill2 = True
-                    case "Disguise : 50":
-                        newCharacter["Skills"]["Disguise"] = 50
-                        additionalSkill2 = True
-                    case "Forensics : 40":
-                        newCharacter["Skills"]["Forensics"] = 40
-                        additionalSkill2 = True
-                    case "Foreign Language (Choose One) : 40":
-                        languageAnswer = input("What is the language?")
-                        newCharacter["Skills"]['Language']['Language 1']['Name'] = languageAnswer
-                        newCharacter["Skills"]['Language']['Language 1']['Rating'] = 40
-                        additionalSkill2 = True
-                    case "HUMINT : 50":
-                        newCharacter["Skills"]["HUMINT"] = 50
-                        additionalSkill2 = True
-                    case "Navigate : 50":
-                        newCharacter["Skills"]["Navigate"] = 50
-                        additionalSkill2 = True
-                    case "Occult : 50":
-                        newCharacter["Skills"]["Occult"] = 50
-                        additionalSkill2 = True
-                    case "Pharmacy : 40":
-                        newCharacter["Skills"]["Pharmacy"] = 50
-                        additionalSkill2 = True
-                    case _:
-                        print("Invalid Option, try again")
+    newCharacter = skillHelper.setSkillsFromList(newCharacter, professionPreset.skillList)
+    if len(professionPreset.secondary) > 0:
+        chosenSecondary = []
+        n = secondaryChoices
+        while n > 0:
+            print("You have " + str(n) + " Secondary Skills to pick")
+            z = 1
+            for x in professionPreset.secondary:
+                print(str(z) + ".) " + x["Name"] + " : " + str(x["Skill"]))
+                z += 1
+            secondaryAnswer = input("Please select an option...\n")
+            selectIndex = int(secondaryAnswer) - 1
+            chosenSecondary.append(professionPreset.secondary[selectIndex])
+            del professionPreset.secondary[selectIndex]
+            n -= 1
+        newCharacter = skillHelper.setSkillsFromList(newCharacter,chosenSecondary)
 
     #TODO add employerList
     employer = input("Please enter your employer.\n")
@@ -330,10 +168,10 @@ def createNewCharacter():
     newCharacter['Bonds']['Bond 1']['Name'] = bondName
     newCharacter['Bonds']['Bond 1']['Score'] = newCharacter['BaseStats']['Cha']
 
-    #TODO Skill assignment
+    #TODO Backgrounds
 
     #Save Character
     fileName = "Characters/" + name + ".json"
     with open(fileName, mode="w", encoding="utf-8") as write_file:
-        json.dump(newCharacter, write_file)
+        json.dump(newCharacter, write_file,indent=2)
 
